@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Geodesic optimal transport regression\\ MR5045129}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+	
+	\noindent
+	This paper develops a regression framework for random objects taking values in a common non-Euclidean metric space, addressing the largely unexplored case where both predictors and responses are non-Euclidean. Classical regression relies on linear structure, which is absent for many modern data types, such as probability distributions, directional data, or symmetric positive definite matrices. While existing approaches, including Fréchet regression, typically accommodate only one non-Euclidean component, the proposed \emph{geodesic optimal transport (GOT) regression} provides a unified extension of multiple linear regression to general geodesic metric spaces.
+	
+	The key idea is to replace linear differences with movements along geodesics, i.e., shortest paths in the space. Let $(M,d)$ be a geodesic metric space with unique geodesics. For $\omega_1,\omega_2 \in M$, the geodesic $\gamma_{\omega_1,\omega_2}(t)$ serves as a canonical path connecting them. The authors extend optimal transport beyond its classical formulation in Wasserstein spaces by defining transport maps that move objects along such geodesics. This yields an intrinsic notion of displacement that does not rely on vector space operations. A central assumption, the \emph{ubiquity of geodesics}, ensures that these transport paths can be consistently transferred across the space.
+	
+	A principal contribution is the construction of an algebra on transport maps. Composition of transports replaces addition, while scalar multiplication corresponds to rescaled movement along geodesics. Although this algebra is generally noncommutative, it suffices to define regression models that parallel classical linear formulations. The development follows a clear logical progression: regression requires algebraic operations; non-Euclidean spaces lack these operations; geodesics provide intrinsic directions; and transport maps supply a substitute algebra.
+	
+	Within this framework, the regression model resembles its Euclidean counterpart. For a single predictor $X_i$ and response $Y_i$, the model is
+	\[
+	Y_i = \varepsilon_i \oplus (\alpha^{*} \odot T_{\mu,X_i})(\nu),
+	\]
+	where $\mu$ and $\nu$ are Fréchet means and $\varepsilon_i$ is a random perturbation. This directly generalizes the linear model $Y_i = \alpha^{*}(X_i - \mathbb{E}[X]) + \mathbb{E}[Y] + \varepsilon_i$. For multiple predictors, the model involves ordered compositions of transport maps; since composition is not commutative, an ordering must be identified, and the authors provide a data-adaptive selection procedure.
+	
+	The theoretical results establish consistency of parameter estimation and predictor ordering under suitable geometric conditions, including regularity of geodesics and continuity of the transport mapping. These results extend regression analysis to general metric-space-valued data, where convergence is naturally expressed in terms of metric distances rather than norms.
+	
+	A notable strength of the approach is its broad applicability. The framework encompasses several important spaces, including the Wasserstein space of distributions, Hilbert spheres associated with the Fisher--Rao metric, and manifolds of symmetric positive definite matrices. This generality sets the method apart from existing approaches that are tailored to specific geometries, providing instead a unified methodology for diverse data types.
+	
+	Empirical results support the effectiveness of the proposed method. In simulations and applications to mortality and temperature data, GOT regression achieves lower prediction errors than kernel-based alternatives such as generalized Nadaraya--Watson estimators. The estimated coefficients also exhibit interpretable patterns, including regression-to-the-mean effects in transport space, demonstrating that the model retains interpretability despite the underlying geometric complexity.
+	
+	In summary, the paper introduces a coherent extension of regression theory to non-Euclidean settings through a transport-based algebra defined on geodesic metric spaces. By generalizing optimal transport to arbitrary geometries, it unifies regression modeling for complex data and provides both theoretical guarantees and practical advantages. 
+	
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ A Kernel Test for Causal Association via
+	Noise Contrastive Backdoor Adjustment}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+
+This article proposes a non-parametric approach to testing for the presence of a causal effect by extending the work of Gretton et al. on the Hilbert-Schmidt Independence Criterion (HSIC) using g-computation principles. The specific contributions are as follows:
+\begin{itemize}
+	\item Introducing Backdoor-HSIC: Backdoor-HSIC is a novel extension of HSIC derived using importance-weighted covariance operators. The convergence properties of the corresponding estimators in causal settings have also been established. Also developed is a new optimization strategy to improve the effective sample size.
+	\item Novel Permutation Strategy: This work provided a permutation strategy for backdoor-HSIC that ensures a permutation test with theoretically correct size for arbitrary treatment types.
+	\item Empirical Evaluation: Demonstrating that backdoor-HSIC achieves correct size and exhibits strong power across various treatment types and with a large number of confounders when testing the do-null hypothesis (see the definition in the paper).
+	\item Ablation Studies and Limitations: The article also conducted ablation studies to analyze backdoor-HSIC and characterized the circumstances under which it may become invalid.
+\end{itemize}
+	
+\end{document}
+
+
+
+
+

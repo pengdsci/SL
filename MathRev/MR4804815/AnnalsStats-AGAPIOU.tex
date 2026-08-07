@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Heavy-tailed Bayesian Non-parametric Adaptation}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+
+This paper introduces a novel Bayesian approach for non-parametric adaptation to smoothness using heavy-tailed series priors, termed the over-smoothed heavy-tailed (OT) prior. Unlike traditional methods that rely on hyper-parameter tuning or explicit model selection, this strategy achieves adaptation through the heavy tails of the prior distribution, offering a distinctively Bayesian solution. The method is shown to yield adaptive posterior contraction rates that are near-minimax optimal (up to logarithmic factors) in various settings, including Gaussian regression (for both $L^2$ and $L^\infty$-norms), linear inverse problems, and anisotropic Besov classes. Additionally, tempered posteriors extend its applicability to more general models.
+
+A key advantage of the OT prior is its simplicity—it operates directly on basis coefficients without requiring additional hyper-parameters for adaptation. While other Bayesian methods mimic frequentist's techniques (e.g., sieve priors for model selection or spike-and-slab for thresholding), the OT prior leverages its tail behavior for soft, automatic adaptation. Numerical simulations support the theoretical findings, demonstrating the method’s effectiveness in practice. This approach provides a robust, tuning-free alternative for non-parametric Bayesian inference.
+
+The authors outline future research directions, including applications to deep ReLU neural networks and sparse settings (Rectified Linear Unit activation function, ReLu(x) = $\max{0, x}$). The soft selection mechanism of the OT prior could be especially useful in high-dimensional or computationally intensive scenarios where exact sparsity (e.g., spike-and-slab) is impractical. These open problems highlight the potential for extending this Bayesian framework to modern machine learning and statistical challenges.
+\end{document}
+
+
+
+
+

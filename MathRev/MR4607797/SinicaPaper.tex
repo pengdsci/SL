@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ SEMIPARAMETRIC MAXIMUM LIKELIHOOD ESTIMATION WITH TWO-PHASE STRATIFIED CASE-CONTROL SAMPLING}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+The article introduced a semiparametric logistic regression model under a special two-phase stratified case-control sampling plan.
+
+Let $Y$ be the binary response (1= case, 0 = control), and $\mathbf{X}$ be the vector of $p$ covariates with values available for all subjects in phase sampling. $Z$ is a covariate risk variable with values available only for randomly selected subjects in phase II Bernoulli sampling. Let A be the matching strata taking value $a = 1, 2, \cdots, S$.  The logistic regression for the $a$-th stratum is defined to be
+$$
+Pr(Y=1|\mathbf{X}, Z: A = a) = \frac{\exp(\alpha_a + \mathbf{\beta}^T)\mathbf{X} + \beta_2Z}{1+\exp(\alpha_a + \mathbf{\beta}^T)\mathbf{X} + \beta_2}
+$$
+\noindent where $\alpha_a$ is the intercept of $a$-th stratum for $a = 1, 2, \cdots, S$. A parametric model for $Pr(Z | \mathbf{X}; A)$ with density $p_{\theta} (Z | \mathbf{X}; A)$ is adopted where $\theta$ is the index parameter vector. Let $\delta_x^a$ denote the probability mass of $X = x$ in the $a$-th matching stratum
+($a = 1,2, \cdots, S$), which satisfies $\sum_x \delta_x^a = 1$.  Assume further that $R$ is the Bernoulli variable in phase II sampling, then the complete {\bf retrospective} log-likelihood function is given by
+$$
+\ell_0= \log \prod_{i=1}^nP(R_i|Y_i, \mathbf{X}_i, A_i) +\log\left\{ \prod_{i \in P_I/P_{II}} P(\mathbf{X}_i|A_i, Y_i) \times \prod_{i \in P_{II}}Pr(\mathbf{X}_i,Z_i|A_i, Y_i) \right\} 
+$$
+where $P_I$ and $P_{II}$ denote subjects in Phase I and Phase II, respectively. Since the missingness of $Z_i$ is at random, the authors proposed a semiparametric ML estimator of $(\mathbf{\beta}^T, \mathbf{\theta})^T$ by maximizing the second part of the above log-likelihood function which is expressed in the following
+
+\begin{equation}
+	\begin{aligned}
+		\ell(\mathbf{\beta}, \mathbf{\theta}, \mathbf{\delta}) = & \sum_{i=1}^n \left\{ R_i[Y_i(\mathbf{\beta}_i^T\mathbf{X}_i+\beta_2Z_i)] +\log p_{\theta}(Z_i|\mathbf{X}_i,A_i) \right.  \\
+		& \left.+ (1-R_i)Y_i\log\sum_z [ \exp(\mathbf{\beta}_1^T\mathbf{X}_i + \beta_2z)p_{\theta}(Z=z|\mathbf{X}_i, A_i)] + \log \delta_{\mathbf{X}_i}^{A_i}  \right\} \\
+		& -\sum_a n_{1a}\log\left\{\exp(\mathbf{\beta}_1^T\mathbf{x}+\beta_2z)p_{\theta}(Z=z|\mathbf{x}, a)\cdot\delta_{\mathbf{x}}^a \right\}
+	\end{aligned}
+\end{equation}
+
+Since $\mathbf{\delta}$ is a high-dimensional nuisance parameter, the profile likelihood of $(\mathbf{\beta}, \mathbf{\theta})$ is given by
+$$
+\ell_P(\mathbf{\beta}, \mathbf{\theta}, \hat{\mathbf{\delta}}(\mathbf{\beta},\mathbf{\theta})) = \sup_{\mathbf{\delta}}\ell(\mathbf{\beta}, \mathbf{\theta}, \mathbf{\delta})
+$$
+The odds ratio parameters will then be estimated from the above log-likelihood function. Some asymptotic results of the profile MLE were presented along with a numerical example using a real-world cancer data.
+
+
+\end{document}
+
+
+
+
+

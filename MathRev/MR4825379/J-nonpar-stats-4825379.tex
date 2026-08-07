@@ -1,0 +1,35 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Integrated log-rank test \\MR482573}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+The log-rank test admits multiple interpretations including nonparametric (via $2\times 2$ tables), semi-parametric (through the proportional hazards model), and parametric (as an empirical process) but it loses power under non-proportional hazards (NPH). To address this limitation,  an integrated log-rank test was established based on the author’s early work on regression effect processes. This test offers improved performance for alternatives where treatment effects vary monotonically (e.g., waning or increasing over time). Under these alternatives, the test is shown to be asymptotically unbiased, consistent, and uniformly most powerful. Under the null hypothesis, its behavior mirrors the area under a Brownian motion (with zero mean and signed excursions), whereas under proportional hazards (PH), it resembles Brownian motion with linear drift, where the drift slope reflects the effect size and sample size.
+
+The construction of the integrated log-rank test is grounded in the authors’ early work on regression effect processes, incorporating sequential standardization like the log-rank test but with enhanced flexibility. It is linked to stochastic processes (Brownian motion), and its empirical performance makes it particularly valuable when prior knowledge suggests time-varying effects. It also balances optimality for targeted alternatives (e.g., monotonic trends) with robustness under misspecification, a trade-off that commonly challenges the classical log-rank test.
+
+Using the proposed integrated test, three recently published clinical trials were re-evaluated to gain insight into potential outcomes under three scenarios: (1) sustained treatment effects, (2) waning treatment effects, and (3) delayed treatment effects following an initial period with little to no observable impact.
+
+\end{document}
+
+
+
+
+

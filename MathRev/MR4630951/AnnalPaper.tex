@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ EXTREME VALUE INFERENCE FOR HETEROGENEOUS POWER LAW DATA}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+
+This article extended the extreme value statistic to independent data with possibly very different distributions and derived a novel asymptotic normality result for the well-known Hill estimator of the tail index of the underlying distribution. Consider independent random variables $\{ X^{(p)}_1, \cdots, X^{(p)}_p \}$, for $p \in N$, that are not necessarily identically distributed. Define their empirical distribution function by
+$$
+F_{\text{emp}}(x) = \frac{1}{p}\sum_{i=1}^p \mathbb{1}[X_i^{(p)} \le x]
+$$
+and their average distribution faction by
+$$
+F_p(x) = \mathbb{E} F_{\text{emp}}(x) = \frac{1}{p}\sum_{i=1}^p F_{pi}(x), \hspace{5mm} F_{pi}(x) = \mathbb{P}(X_i^{(p)} \le x)
+$$
+Let $T_p = 1 - F_p$, the average survival function, and 
+$$
+\lim_{t \to \infty}\frac{T(tx)}{T(t)} = x^{-1/\gamma}, \hspace{3mm} x > 0.
+$$
+$\gamma > 0$ is a natural extension on the tail index of $F$. The well-known Hill estimator of $\gamma$ is given by
+$$
+\hat{\gamma} = \frac{1}{k}\sum_{i=0}^{k-1} \log X_{p-i:p} - \log X_{p-k:p}
+$$
+where $X_{p-k:p} \le X_{p-i+1:p} \le \cdots \le X_{p:p}$ are the $k+1$ upper-order statistics defined based on the random sample. 
+
+Under some regularity conditions, the authors derived a new asymptotic normal distribution of $\hat{\gamma}$ with an explicit expression of variance that depended on a tail empirical process.
+
+From the application perspective, the authors also proposed an extreme quantile estimator and derived its asymptotic distribution as well. 
+
+
+\end{document}
+
+
+
+
+

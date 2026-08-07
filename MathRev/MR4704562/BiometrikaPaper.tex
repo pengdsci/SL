@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ One-step targeted maximum likelihood estimation for
+	targeting cause-specific absolute risks and survival curves}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+This article presents an extension of two authors' independent works based on the targeted maximum likelihood estimation proposed by the second author and his coauthor \cite{1} and the work of both authors and their co-author \cite{2} on a one-step targeted maximum likelihood estimation methodology in a single parameter survival modeling on cause-specific hazards to a multi-parameter scenario. 
+
+
+Unlike in the single-parameter case in which the authors used an iterative targeting procedure that updates cause-specific hazards recursively to solve the efficient influence curve equation for that particular univariate parameter, in this article, the authors defined a universal least favorable sub-model for the cause-specific hazards and a corresponding one-step targeting procedure that allows us to solve multiple score equations simultaneously. 
+
+The article highlights two major developments:  (1) a simultaneous inference for treatment effects on multiple absolute risks in competing risk settings, and (2) an inference for the full survival curve or absolute risk curve across time. 
+
+Asymptotic results related to the new methodology were presented. The proposed methodology can also be applied to settings with right-censored event times and can handle competing risk scenarios.
+
+%%%%%%
+\begin{thebibliography}{1}
+	%
+	\bibitem{1}
+	 van der Laan M. J., Rubin D. B. (2006). Targeted maximum likelihood
+	 learning \emph{Int J Biostat.} \textbf{2(1)}, article 11.
+	% 
+	
+	\bibitem{2}
+	 Rytgaard, H. C.W., Eriksson, F., van der Laan, M. J. (2023). Estimation of time-specific intervention effects on continuously distributed time-to-event outcomes by targeted maximum likelihood estimation. \emph{Biometrics} \textit{https://doi.org/10.1111/biom.13856}.
+	%
+\end{thebibliography}
+	
+	
+	
+	
+\end{document}
+
+
+
+
+

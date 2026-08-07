@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ On the statistical role of inexact matching in observational studies}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+Consider the problem of using a large observational data set $\{ (X_i, Y_i, Z_i) \}_{i \le n}$ to test whether a binary treatment $Z_i \in \{0, 1\}$ has any causal effect on an outcome $Y_i \in R$. Assume that units $\{ (X_i, Y_i(0), Y_i(1), Z_i) \}$ are independent samples from a common distribution $P$ with observed values $(X_i, Y_i, Z_i)$ where $Y_i = Y_i(Z_i)$. The pair-matching procedure was the optimal Mahalanobis matching that pairs each treated observation $i$ with a unique untreated observation $m(i)$ in a way that minimizes the total Mahalanobis distance across pairs,
+$$
+\sum_{Z_i=1}\{(X_i-X_{m(i)})^T\hat{\Sigma}^{-1}(X_i-X_{m(i)}) \}^{1/2}
+$$
+
+The paired Fisher randomization test was used to test the null hypothesis of primary interest $H_0: Y_i(0) = Y_i(1)$ with probability 1 under distribution P with two well-known test statistics: difference-in-mean (DM) and Regression adjusted statistic (REG) calculated based on the matched data
+$$
+\hat{\tau}^{DM} = \frac{1}{N_1}\sum_{Z_i=1}\{Y_i - Y_{m(i)}\}
+$$ 
+and
+$$
+\hat{\tau}^{REG} = \underset{\tau\in R}{\text{argmin}}\underset{(\gamma, \beta)\in R^{1+d}}{\text{min}} \sum_{i \in \mathcal{M}} (Y_i-\gamma-\tau Z_i-\beta^TX_i)^2
+$$
+The corresponding test statistics based on randomly permuted observed data were similarly defined and denoted by $\hat{\tau}_{*}^{DM}$ and $\hat{\tau}_{*}^{REG}$ respectively. The randomized p-values calculated by $\hat{p}^{DM} = pr(|\hat{\tau}_*^{DM}| \ge |\hat{\tau}_*^{DM}| | \mathcal{D}_n)$ and $\hat{p}^{REG} = pr(|\hat{\tau}_*^{REG}| \ge |\hat{\tau}_*^{REG}| | \mathcal{D}_n)$, where $\mathcal{D}_n$ was the original sample data. With these asymptotically validated tests, the authors showed that inexact matching often leaves behind statistically meaningful bias that renders standard randomization tests asymptotically invalid and also recommended additional model-based covariate adjustment after inexact matching.	In the framework of local misspecification, the authors proved that matching makes subsequent parametric analyses less sensitive to model selection or misspecification.
+
+
+
+\end{document}
+
+
+
+
+

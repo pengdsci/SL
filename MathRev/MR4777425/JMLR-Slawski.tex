@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Permuted and Unlinked Monotone Regression in
+	$\mathbb{R}^d$: an approach based on mixture modeling and optimal transport}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+
+This paper explores permuted and uncoupled regression for maps $f^* : \mathbb{R}^d \to \mathbb{R}^d$
+that are gradients of convex functions, the multi-dimensional analog of monotone non-decreasing functions. The study focuses on exact permutation recovery and de-noising, establishing several connections to recent works on related permuted data problems.
+
+The de-noising task is addressed through de-convolution, leveraging the Kiefer-Wolfowitz non-parametric maximum likelihood estimator (NPMLE) and optimal transport. The rich body of literature and the growing interest in optimal transport provide a solid foundation for analyzing the proposed approach.
+
+This work is considered as an extension of one-dimensional permuted regression problems. However, the implementation of this approach is particularly convenient. The underlying convex optimization problems are straightforward to solve and do not require intricate tuning. Currently, the only parameter to specify is the grid for the approximate Kiefer-Wolfowitz problem. Default grid options are available and perform well empirically. Notably, the finer the grid, the more accurate the results, making the approach constrained only by available computational resources.
+	
+\end{document}
+
+
+
+
+

@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Tail inverse regression: Dimension reduction for 	prediction of extremes}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+This article developed a novel framework of dimension reduction method based on the tail inverse regression for extreme (TIREX) response to estimate an extreme sufficient dimension reduction (SDR) space of potentially smaller dimension than that of a classical SDR space. 
+
+To formulate the tail inverse regression and prove the asymptotic results, the authors introduced tail conditional independence (TCI, motivated from \cite{2}) and extreme dimension reduction spaces that was extended from the sufficient dimension reduction (SDR) of Cook \cite{1}. The authors proved the weak convergence of tail empirical processes involved in the estimation procedure and illustrated the relevance of the proposed approach on simulated and real-world data.
+
+The authors compared the TIREX with other dimension reduction methods and evaluated its performance on simulated and real datasets. The numerical results showed that the TIREX outperformed most of its existing competitors. 
+
+It is also worth noting that when the TIREX is used as a predictive model for predicting high quantiles, the TIREX is an algorithm for rare event classification in machine learning. 
+
+
+
+%%%%%%
+\begin{thebibliography}{1}
+	%
+	\bibitem{1}
+	 Cook, R.D. and Li, B. (2002). Dimension reduction for conditional mean in regression. \emph{Ann. Statist.} \textbf{30)}, 455-574.
+	% 
+	\bibitem{2}
+	 Gardes, L. (2018). Tail dimension reduction for extreme quantile estimation. \emph{Extremes}, \textbf{21}, 57-95.
+	%
+\end{thebibliography}
+	
+	
+	
+	
+\end{document}
+
+
+
+
+

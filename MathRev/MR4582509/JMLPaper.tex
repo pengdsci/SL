@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Gaussian Processes with Errors in Variables: Theory and
+	Computation}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+This article is concerned with the generic regression problem with errors-in-variables in the following form in which responses $Y_i$’s are observed corresponding to evaluations of an unknown regression function $f$ on noise-contaminated covariates $W_i$’s as
+
+$$
+Y_i = f(X_i) + \epsilon_i, \hspace{5mm} \epsilon \stackrel{\text{i.i.d}}{\sim} N(0, \sigma^2)
+$$
+$$
+W_i = X_i + u_i, \hspace{5mm}, u_i \stackrel{\text{i.i.d}}{\sim}  N(0, \delta^2), \hspace{5mm} X_i \stackrel{\text{i.i.d}}{\sim} p, \hspace{5mm} i = 1, 2, \cdots, n.
+$$
+\noindent with relevant priors specified in the following
+$$
+f \sim \Pi_f, \hspace{5mm} p \sim \Pi_p, \hspace{5mm}\sigma^2 \sim \Pi_{\sigma^2}, \hspace{5mm} \delta^2 \sim \Pi_{\delta^2}.
+$$
+
+\noindent where $Y_i$ is assumed to be conditionally independent of $W_i$ given $X_i$. In the Bayesian framework, the posterior distribution of unknown parameters $\theta = (f, p, \delta)$ with given observed values $D_n = \{(Y_i, W_i), i = 1, 2, \cdots, n\}$ is obtained by using Bayes’ rule
+
+$$
+P(\theta|D_n) = \frac{P(D_n|\theta) P(\theta)}{P(D_n)}.
+$$
+
+By specifying a Gaussian process prior on the regression function $f$ and a Dirichlet process Gaussian mixture prior on the unknown distribution of the unobserved covariates that is capable of recovering the unknown infinite dimensional parameters $f$, the authors showed that the posterior distribution of the regression function and the unknown covariate density attain optimal rates of contraction adaptively over a range of H\"{o}lder classes, up to logarithmic terms. 
+
+In addition, the authors also developed a novel surrogate prior for approximating the Gaussian process prior that leads to efficient computation and preserves the covariance structure, hence, facilitating easy prior elicitation.
+
+Besides the theoretical results, the authors compared several competitors and evaluated their performance based on mean square errors (MSE) and averaged mean squared errors (AMSE) values. The empirical performance of the proposed approach was demonstrated through simulation experiments and a real data example.
+
+
+	
+\end{document}
+
+
+
+
+

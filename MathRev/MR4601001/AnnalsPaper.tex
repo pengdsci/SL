@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ MINIMAX RATES FOR CONDITIONAL DENSITY ESTIMATION VIA
+	EMPIRICAL ENTROPY}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+
+In classical regression and classification, the primary interest is to estimate the means of response $Y$ in sub-populations defined by the covariate space $\mathcal{X}$, i.e., $\mu_{\mathcal{X}} = E[Y|\mathbf{X}]$. The general regression problem is defined as $\mu_{\mathcal{X}} = g(\mathbf{X}:\mathbf{\theta})$, $\mathbf{\theta}$ is the vector of model parameters. Both regression and classification problems have been extensively studied. Estimating the density function of $Y$ in sub-covariate spaces is more general and useful since the density function over covariate spaces contains the information of the conditional means. However, {\emph {conditional density estimation}} is technically more challenging. The traditional uniform metric entropy that is used to characterize the joint density function will not work for conditional density due to the curse of (high) dimension.
+
+Authors in his article proposed the minimax rates for characterizing conditional density estimation using the {\emph {empirical Hellinger entropy}}. Let $\mu_{\mathcal{X}}$ be the unknown marginal distribution over covariates, $f^*$ be the true conditional density function, and $\hat{f}$ be the estimator. The estimation of conditional density under {\emph{logarithmic loss}} is to minimize the following {\emph{Kullback-Leibler}} (KL) divergence
+
+$$
+\mathbb{E}_{\mathcal{X} \sim \mu_{\mathcal{X}}} KL(f*(x)||\hat{f}(x))
+$$
+
+The minimax rates of convergence for these tasks are determined (up to logarithmic factors) by a critical radius $\epsilon_n$ satisfying the relationship.
+
+\begin{equation}
+\mathcal{H}(\mathcal{F},\epsilon_n) \asymp n\epsilon_n^2
+\end{equation}
+where $\mathcal{H}$ denotes the entropy for the model class $\mathcal{F}$ under a suitable problem-specific notion of distance. Instead of using existing entropy such as uniform metric entropy, authors proposed {\emph{empirical Hellinger entropy}} for the class of conditional density families. 
+
+$$
+\mathcal{H}_{H,2}(\mathcal{F},\epsilon_n, n) \asymp n\epsilon_n^2
+$$
+
+Let $\mathcal{R}_n(\mathcal{F})$ be the minimax rate of KL under {\emph{empirical Hellinger entropy}}. Authors established the upper and lower bounds of $\mathcal{R}_n(\mathcal{F})$ under certain conditions. 
+
+They showed that the classical fixed-point relationship in equation (1) governs the minimax rates for conditional density estimation, provided that one adopts empirical Hellinger entropy as the notion of complexity. Furthermore, the empirical Hellinger entropy captures the correct dependence on the complexity of the covariate space and leads to optimal rates, even for high-dimensional, potentially unbounded, covariate spaces.  
+
+Authors also related their new development in density estimation method to some existing work such as non-parametric density estimation, non-parametric regression, and sequential prediction, etc.
+
+
+
+\end{document}
+
+
+
+
+

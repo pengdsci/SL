@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Analysis of the expected $L_{2}$ error of an over-parametrized deep neural network estimate learned by gradient descent without regularization.\\ MR5025365}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+\noindent This paper studies an over-parametrized deep neural network (DNN) estimator in nonparametric regression. The main novelty is that the estimator is trained \textbf{without explicit regularization}, using only gradient descent on the empirical $L_{2}$ loss. Under suitable choices of network architecture, initialization, step size, and number of gradient steps, the authors prove universal consistency and rates of convergence, extending also to interaction models that circumvent the curse of dimensionality.
+
+Let $(X,Y)\in\mathbb{R}^d\times\mathbb{R}$ with $\mathbb{E}Y^2<\infty$ and regression function $m(x)=\mathbb{E}[Y\mid X=x]$. Given i.i.d. data $\{(X_i,Y_i)\}_{i=1}^n$, the network output is a linear combination of $K_n$ fully connected networks with $L$ layers, $r$ neurons per layer, and logistic squasher $\sigma(x)=1/(1+e^{-x})$:
+
+$$
+f_{\mathbf{w}}(x)=\sum_{k=1}^{K_n} w_{1,1,k}^{(L)} f_{k,1}^{(L)}(x),
+$$
+with $f_{k,i}^{(l)}$ defined recursively via
+$$
+f_{k,i}^{(l)}(x)=\sigma\!\left(\sum_{j=1}^r w_{k,i,j}^{(l-1)} f_{k,j}^{(l-1)}(x)+w_{k,i,0}^{(l-1)}\right).
+$$
+
+Weights are learned by gradient descent on the empirical risk
+$$
+F_n(\mathbf{w})=\frac1n\sum_{i=1}^n |f_{\mathbf{w}}(X_i)-Y_i|^2,
+$$
+with step size $\lambda_n=1/t_n$ and $t_n$ steps. Initialization sets outer weights to zero and inner weights random in intervals scaling with $\log n$ and $n^\tau$. The final estimate is truncated: $m_n(x)=T_{\beta_n}f_{\mathbf{w}^{(t_n)}}(x)$ with $\beta_n=c_1\log n$.
+
+\medskip
+\noindent \textbf{Universal consistency (Theorem 3.1).} 
+Assume $\operatorname{supp}(X)$ bounded, $\mathbb{E}Y^2<\infty$, and for some $\kappa>0$,
+$$
+\frac{K_n}{n^\kappa}\to 0,\qquad \frac{K_n}{n^{r+2}}\to\infty,
+$$
+and $t_n\ge c_2 L_n$ with $L_n\ge K_n^{3/2}(\log n)^{6L+5}$. Then
+$$
+\mathbb{E}\int |m_n(x)-m(x)|^2 d\mathbb{P}_X(x)\to 0\quad (n\to\infty).
+$$
+The condition $K_n\gg n^{r+2}$ formalizes over-parametrization, yet consistency holds.
+
+\medskip
+\noindent \textbf{Rate of convergence (Theorem 3.2).} 
+Let $m$ be $(p,C)$-Hölder smooth with $1/2\le p\le 1$, $\operatorname{supp}(X)\subseteq[0,1]^d$, and $\mathbb{E}e^{c_3 Y^2}<\infty$. Choose
+$$
+K_n=n^{6d+r+2},\quad \tau=\frac{1}{1+d},\quad t_n\approx K_n^{3/2}(\log n)^{6L+2}.
+$$
+Then for any $\epsilon>0$,
+$$
+\mathbb{E}\int |m_n(x)-m(x)|^2 d\mathbb{P}_X(x)\le c_5\, n^{-\frac{1}{1+d}+\epsilon}.
+$$
+The rate $n^{-1/(1+d)}$ is optimal for $p=1/2$; for $p>1/2$ it does not improve due to approximation error bounds.
+
+\medskip
+\noindent \textbf{Interaction models (Theorem 3.3).} 
+If
+$$
+m(x)=\sum_{|I|=d^*} m_I(x_I),\quad x_I=(x^{(j_1)},\dots,x^{(j_{d^*})}),
+$$
+with $(p,C)$-smooth components, then
+$$
+\mathbb{E}\int |m_n(x)-m(x)|^2 d\mathbb{P}_X(x)\le c_7\, n^{-\frac{1}{1+d^*}+\epsilon},
+$$
+independent of the original dimension $d$, showing dimension reduction.
+
+\medskip
+\noindent A key technical tool is \textbf{Lemma 5.1}, which bounds the optimization error under convexity in part of the parameters. For weight vectors $(u,v)$ with $u\mapsto F(u,v)$ convex, step size $\lambda=1/t_n$, one obtains
+$$
+F(u_{t_n},v_{t_n})\le F(u^*,v_0)+D_n\|u^*\|\sqrt{2F(u_0,v_0)}+\frac{\|u^*-u_0\|^2}{2}+\frac{F(u_0,v_0)}{t_n}.
+$$
+
+\noindent \textbf{Lemma 5.7} provides an approximation bound: for $l\approx \frac{1}{1+d}\log_2 n$ and $\delta=n^{-1/(1+d)}$,
+$$
+\int \Bigl|\sum_{k=1}^{\tilde K_n} w_{1,1,k}^{(L)} f_{\bar w,k,1}^{(L)}(x)-m(x)\Bigr|^2 d\mathbb{P}_X(x)\le c\Bigl(n^{-\frac{1}{1+d}}+n^{-\frac{2p}{1+d}}\Bigr).
+$$
+
+Complexity is controlled via metric entropy (Lemma 5.4), enabling empirical process bounds. The removal of the regularization term is a significant conceptual contribution, and the simulation study illustrates practical relevance. 
+
+\end{document}
+

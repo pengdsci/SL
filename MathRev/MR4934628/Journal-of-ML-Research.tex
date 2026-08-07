@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Performance of Bayesian linear regression in a model with mismatch \\ MR4934628}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+
+This paper addresses a fundamental question in high-dimensional statistics: what happens when we perform Bayesian inference with an incorrect prior? Specifically,  The authors considered linear regression where the data are generated from $\mathbf{y} = \bar{\mathbf{G}}\mathbf{x}^* + \mathbf{z}$ with $\bar{\mathbf{G}}_{ij} \sim \mathcal{N}(0,1/N)$ and $\mathbf{z} \sim \mathcal{N}(0, \Delta_*\mathbf{I})$, but did not assume both the true coefficient distribution and noise level $\Delta_*$. Instead, they specify a mismatched posterior
+$$
+P(\mathbf{x} \mid \mathcal{D}) \propto \exp\Big( \sum_{k=1}^M u\big((\bar{\mathbf{G}}\mathbf{x})_k - y_k\big) - \kappa \|\mathbf{x}\|^2 \Big),
+$$
+where $u(\cdot)$ is a concave potential and $\kappa$ controls prior variance. The Bayesian estimator studied is the posterior mean $\widehat{\mathbf{x}} = \mathbb{E}_{P(\mathbf{x}|\mathcal{D})}[\mathbf{x}]$.
+
+The core technical contribution is a rigorous characterization of the asymptotic performance of $\widehat{\mathbf{x}}$ in the proportional limit where $M, N \to \infty$ with $M/N \to \alpha > 0$. By establishing a mapping to the Shcherbina–Tirozzi spin glass model, the authors show that both the normalized mean squared error (MSE) and the log-partition function converge to deterministic limits described by a low-dimensional variational principle:
+$$
+\lim_{N \to \infty} \frac{1}{N} \mathbb{E} \|\widehat{\mathbf{x}} - \mathbf{x}^*\|^2 = q, \quad \lim_{N \to \infty} \frac{1}{N} \mathbb{E} \ln Z(\mathcal{D}) = F(q, \rho),
+$$
+where $(q, \rho)$ solves a system of fixed-point equations. Notably, the asymptotic MSE depends only on the second moment $\gamma = \lim \|\mathbf{x}^*\|^2/N$, not on other details of the coefficient distribution.
+
+When the posterior distribution is formulated as a Gibbs measure with inverse temperature $\beta$, the asymptotic mean squared error $q$ exhibits invariance with respect to $\beta$. This property establishes a statistical equivalence: in the high-dimensional limit, the Bayesian estimator (posterior mean) achieves identical performance to the frequentist ridge or maximum a posteriori (MAP) estimator (posterior mode). Consequently, under Gaussian design matrices, sampling from the posterior provides no asymptotic advantage over optimization for the squared-error loss.
+
+This equivalence, however, does not extend to all loss functions. For non-quadratic losses such as the soft absolute value loss $u(s) = -\beta|s|$, the mean squared error shows a non-trivial dependence on $\beta$. Numerical solutions to the associated fixed-point equations confirm the existence of an optimal finite temperature $\beta_{\mathrm{opt}}$. At this temperature, the Bayesian estimator achieves strictly lower error than the M-estimator corresponding to the zero-temperature limit ($\beta \to \infty$). Thus, appropriate Bayesian tempering can yield superior performance relative to optimization-based approaches for non-quadratic loss functions.
+
+These results clarify the nuanced relationship between model mismatch, loss function geometry, and inference methodology in high-dimensional settings. The connection to spin-glass theory provides a rigorous analytical framework, demonstrating that the often-assumed superiority of Bayesian averaging is not universal but depends fundamentally on the loss function. While optimization incurs no asymptotic cost for quadratic losses, careful Bayesian calibration remains valuable for robust losses.
+
+
+
+\end{document}
+
+
+
+
+

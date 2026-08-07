@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Bayesian analysis with conditionally
+	identically distributed sequences \\    MR4888176 }
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+
+
+This paper develops Bayesian-style inference without assuming exchangeability, instead using the weaker \emph{conditionally identically distributed} (c.i.d.) property. The key contribution is that prior and posterior distributions on a parameter space remain well-defined via c.i.d. sequences, with predictive distributions updated using copula-based martingales.
+
+Let $X_{1:\infty} = (X_1, X_2, \dots)$ be a sequence of real-valued random variables. Exchangeability implies a random probability measure $\mu$ such that, given $\mu$, observations are i.i.d. (de Finetti). The c.i.d. property relaxes this: for all $k > n \geq 1$ and bounded measurable $g$,
+\[
+\mathbb{E}[g(X_k) \mid X_{1:n}] = \mathbb{E}[g(X_{n+1}) \mid X_{1:n}] \quad \text{a.s.}
+\]
+A random probability measure $\mu$ still exists with
+\[
+\mu(B) = \lim_{n\to\infty} \mathbb{P}(X_{n+1} \in B \mid X_{1:n}) \quad \text{a.s.}
+\]
+
+A core novelty is constructing prior and posterior via the MLE. For a parametric model $f(x;\theta)$, define $\hat{\theta}_n = \arg\max_{\theta} \sum_{i=1}^n \log f(X_i;\theta)$. Under regularity conditions (strict concavity, integrability, tail bounds), Theorem 3.2 proves $\hat{\theta}_n \to \hat{\theta}_\infty$ almost surely. The distribution of $\hat{\theta}_\infty$ (starting from $X_1$) gives the prior. Given observed $X_{1:n}$, the tail sequence $X_{n+1:\infty}$ is c.i.d., and the distribution of $\hat{\theta}_\infty^{(n)}$ (from the tail) gives the posterior.
+
+Copulas provide a constructive tool. Theorem 3.1: $X_{1:\infty}$ is c.i.d. iff there exist copulas $C_{x_{1:n}}$ such that
+\[
+\mathbb{P}(X_{n+1} \le x, X_{n+2} \le y \mid X_{1:n}=x_{1:n}) = C_{x_{1:n}}\big(F(x\mid x_{1:n}), F(y\mid x_{1:n})\big),
+\]
+where $F(x\mid x_{1:n}) = \mathbb{P}(X_{n+1} \le x \mid X_{1:n}=x_{1:n})$. An iterative scheme is
+\[
+F_{m+1}(x) = (1-\alpha_m)F_m(x) + \alpha_m C_\rho(F_m(x), F_m(x_{m+1})),
+\]
+with $\alpha_m = 1/m$ and Gaussian copula $C_\rho(u,v) = \Phi\big((\Phi^{-1}(u) - \rho\Phi^{-1}(v))/\sqrt{1-\rho^2}\big)$. This ensures $F_m$ forms a martingale converging to $\mu$.
+
+A simpler parametric construction (Section 4.2) is
+\[
+x_{n} = \theta_{n-1} + \sigma_{n-1}z_n,\quad
+\theta_n = (1-a_n)\theta_{n-1} + a_n x_n,\quad
+\sigma_n^2 = \sigma_{n-1}^2(1-a_n^2),
+\]
+with $z_n \stackrel{\text{i.i.d.}}{\sim} N(0,1)$, $a_n \in (0,1)$. Then $\theta_\infty = \lim \theta_n$ exists a.s. and defines the prior. For mixture models, only the sampled component updates, preserving c.i.d.
+
+The paper provides almost-sure MLE consistency under c.i.d., extending classical i.i.d. theory. A subtle point raised by the reviewer is that the predictive distributions converge weakly to $\mu$, but fast decay (e.g., $\sum \alpha_n < \infty$) ensures total variation convergence. This framework is valuable when exchangeability is restrictive or computationally intensive.
+
+\end{document}
+
+
+

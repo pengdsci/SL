@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Efficient quantile regression under censoring
+	using Laguerre polynomials \\ MR4931354}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+This paper presents a sophisticated and elegant method for quantile regression with censored data. The goal was to estimate the linear conditional quantile function:
+$$
+\mathbb{P}(T \leq \beta_{\tau}'X | X) = \tau 
+$$
+
+where $T$ is a survival time, $X$ are covariates, and $\tau$ is the quantile level (e.g., $\tau = 0.5$ for the median). The fundamental challenge is that $T$ is subject to random right-censoring. Instead of observing $(T_i, X_i)$, we observe $(Y_i, \Delta_i, X_i)$, where:
+$$ 
+Y_i = \min(T_i, C_i), \quad \Delta_i = \mathbb{I}(T_i \leq C_i) 
+$$
+and $C_i$ is a censoring time.
+
+Traditional quantile regression minimizes the check loss $\rho_{\tau}(u)=u(\tau - \mathbb{I}(u \leq 0))$. The paper's pivotal insight is to reframe this as a maximum likelihood problem by modeling the error distribution. 
+
+For uncensored data, the check-loss minimization is equivalent to maximizing a log-likelihood where the error $\varepsilon = T - \beta_{\tau}'X$ follows an Asymmetric Laplace Density (ALD):
+
+$$ 
+f(t) = \tau(1-\tau)\exp[-\rho_{\tau}(t)] 
+$$
+which gives $\beta_{\tau} = \operatorname{argmax}_{\beta} \mathbb{E}[\log f(T - \beta'X)]$. The ALD is too rigid for censored data. The authors enrich it using Laguerre polynomials $L_k(\cdot)$ to create a highly flexible, parametric family. The enriched density for the error $\varepsilon$ is:
+
+$$ 
+g_{\gamma}(\varepsilon) = \eta \cdot \exp(-\rho_{\tau}(\varepsilon)) \cdot \left(1 + \sum_{k=1}^{d} \gamma_k L_k(|\varepsilon|)\right)^2 
+$$
+where $\eta$ is a normalizing constant and $\gamma = (\gamma_1, ..., \gamma_d)$ are parameters. Crucially, this density is constructed so that its $\tau$-th quantile is exactly zero, embedding the quantile constraint directly into the model.
+
+With censored data, the log-likelihood for an assumed conditional density $g(\cdot|X)$ of $T$ is:
+$$ \mathcal{L}_n(g) = \sum_{i=1}^{n} \left\{ \Delta_i \log g(Y_i|X_i) + (1-\Delta_i) \log\left(1 - G(Y_i|X_i)\right) \right\} $$
+where $G$ is the corresponding CDF. Since optimizing over all possible densities is impossible, the authors use the method of sieves: considering a sequence of finite-dimensional models $g_{\beta, \gamma}(t|x)$, where the linear quantile is $\beta'x$ and the error follows the enriched Laplace distribution with parameter $\gamma \in \mathbb{R}^{d_n}$.
+
+The dimension $d_n$ grows with sample size $n$, allowing the model to approximate any smooth error distribution. The sieve maximum likelihood estimator (SMLE) is:
+$$ 
+(\hat{\beta}_n, \hat{\gamma}_n) = \operatorname{argmax}_{(\beta, \gamma)} \mathcal{L}_n(g_{\beta, \gamma}) 
+$$
+
+\noindent The paper established asymptotic results for the proposed estimator $\hat{\beta}_n$: 
+
+\begin{itemize}
+	
+	\item Consistency \& Rate of Convergence: $\hat{\beta}_n \to \beta_{\tau}$ in probability. It achieves a convergence rate of $n^{-1/2}$ under standard regularity conditions, which is the optimal parametric rate.
+	
+	\item Asymptotic Normality:
+	$$ 
+	\sqrt{n}(\hat{\beta}_n - \beta_{\tau}) \overset{d}{\to} N(0, \mathcal{I}^{-1}) 
+	$$
+	where $\mathcal{I}$ is the efficient Fisher information matrix.
+	
+	\item Semiparametric Efficiency: A major contribution is the derivation of the asymptotic efficiency bound for the censored quantile regression model. The authors prove their estimator achieves this bound, meaning it has the smallest possible asymptotic variance among all regular estimators. This is a novel result in the literature.
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+

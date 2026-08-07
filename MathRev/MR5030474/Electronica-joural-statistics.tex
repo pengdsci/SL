@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Separation rates for the detection of synchronization of interacting point processes in a mean field frame.
+	Application to neuroscience\\ MR5030474}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+\noindent This paper derives non-asymptotic separation rates for permutation tests of independence between two point processes, motivated by detecting synchronized spiking activity (coincidences) between neurons. The authors provide explicit conditions on the number of trials $n$ needed to control Type II error under two neuroscientifically relevant models: the jittering Poisson injection model and a mean-field network of Hawkes processes.
+
+The testing framework is as follows. One observes $n$ independent pairs of spike trains $(X_i^1,X_i^2)$ over $[0,T]$. A coincidence count $\phi(X_i^1,X_i^2)$ counts spikes from the two neurons within a tolerance $\delta$. The permutation test rejects independence if the average coincidence count is too large compared to its distribution under random permutations of the second coordinates across trials. This test is exact of level $\alpha$ under the null.
+
+Using a refined criterion from Kim et al. (2022), the authors show that Type II error $\le \beta$ holds if
+$$
+\Delta_\phi \ge \frac{C}{\sqrt{n\alpha\beta}}\left(\sqrt{\mathbb{V}[f_\phi]} + \sqrt{\mathbb{V}_\perp[f_\phi]}\right),
+$$
+where $\Delta_\phi = \mathbb{E}[\phi(X_1^1,X_1^2)] - \mathbb{E}_\perp[\phi(X_1^1,X_1^2)]$ measures deviation from independence, and $f_\phi$ is a difference of coincidence counts.
+
+\textit{Jittering Poisson model.} Here, each spike train is a superposition of an independent background Poisson process and a common injected Poisson process whose points are jittered by i.i.d. displacements $\xi$. The authors compute $\Delta_\phi = \eta^1\mathbb{E}[(T-|\xi|)\mathbf{1}_{|\xi|\le\delta}]$ and obtain a lower bound on $n$ involving the maximum background rate $\lambda^{\rm m}$, the injection rate $\eta^1$, and $\mathbb{P}(|\xi|\le\delta)$. The separation rate is parametric ($n^{-1/2}$), and the bound reveals a trade-off in choosing the tolerance $\delta$ depending on the jitter distribution.
+
+\textit{Hawkes mean-field model.} This is the paper's most significant contribution. Consider a fully connected network of $M$ exponential Hawkes processes (kernel $ae^{-bt}$, baseline $\nu$, interaction strength $a/M$), of which only two neurons are observed. As $M\to\infty$ the two observed spike trains become independent (the null). For finite $M$, the deviation $\Delta_\phi$ is of order $1/M$ and is computed exactly. Using cumulant expansions for Hawkes processes (derived via dendrogram representations), the authors bound the variances and show that Type II error control requires
+$$
+n \gtrsim \frac{(M + a/\nu)^2 (1-\ell)^4}{\ell^2 T} \times (\text{function of }\delta),
+$$
+with $\ell=a/b$. The key conclusion is that $n$ must grow at least quadratically with the hidden network size $M$. Hence, if $M$ is of order $\sqrt{n}$ or larger, the dependence between the two observed neurons becomes undetectable---even though they are physically connected. This provides a rigorous statistical explanation for why independence tests may fail in large, dense neural populations.
+
+Simulations confirm the theoretical predictions: in the Poisson model, power is sensitive to $\delta$ and injection rate; in the Hawkes model, the minimal $n$ needed scales like $M^2$.
+
+Overall, this work bridges abstract permutation test theory with concrete neuroscientific models, offering interpretable sample-size conditions. The cumulant bounds for Hawkes processes are of independent interest. The results have clear implications for experimental design in neuroscience and for network inference from sparse observations.
+
+
+
+\end{document}

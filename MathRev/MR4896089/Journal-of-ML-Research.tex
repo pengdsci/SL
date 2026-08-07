@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Efficient and Robust Semi-supervised Estimation of Average
+	Treatment Effect with Partially Annotated Treatment and	Response \\ MR4896089}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+The authors address a pervasive challenge in modern causal inference using electronic health records (EHR). The fundamental problem stems from the expensive nature of obtaining gold-standard data: while precise information about treatment receipt $A$ and clinical outcomes $Y$ typically requires labor-intensive manual chart review—limiting its availability to a small subset of size $n$—noisy surrogates ($\mathbf{S}^A, \mathbf{S}^Y$) and comprehensive confounders $\mathbf{X}$ are readily available for much larger cohorts of size $N \gg n$. This data structure creates both an opportunity and a methodological challenge for estimating the Average Treatment Effect $\psi = \mathbb{E}[Y(1) - Y(0)]$, as traditional supervised methods waste most available data, while naive unsupervised approaches using surrogates as direct substitutes introduce substantial bias.
+
+The authors derive theoretically the efficient influence function (EIF) for the ATE parameter within this semi-supervised context. This derivation recognizes the unique data-generating process where the labeling indicator $R$ depends on the surrogates and confounders, creating a missing-not-at-random mechanism for the gold-standard variables. Building on this EIF, they develop the Semi-supervised Multiple Machine Learning (SMMAL) estimator, which efficiently combines information from both labeled and unlabeled subjects. The estimator incorporates machine learning estimates of several nuisance parameters: the propensity score $\pi(\mathbf{X}) = P(A=1 | \mathbf{X}, R=1)$, the outcome regression models $\mu_a(\mathbf{X}) = \mathbb{E}[Y | A=a, \mathbf{X}, R=1]$ for each treatment arm $a \in {0,1}$, and the labeling mechanism $\rho(\mathbf{X}, \mathbf{S}^A, \mathbf{S}^Y) = P(R=1 | \mathbf{X}, \mathbf{S}^A, \mathbf{S}^Y)$.
+
+The theoretical properties of the SMMAL estimator are established under two distinct regimes. In low-dimensional settings with smooth models, the authors employ B-spline regression and prove that their estimator achieves semi-parametric efficiency, reaching the lower bound for variance among all regular asymptotically linear estimators. For high-dimensional settings, they develop an adaptive sparsity/model doubly robust framework that maintains consistency even when either the propensity score model or the outcome model may be misspecified, provided the other is correctly specified. This double robustness property is particularly valuable in practical applications where model specification uncertainty is common.
+
+Simulation studies comprehensively demonstrate the advantages of the SMMAL approach. The method significantly outperforms supervised benchmarks that discard unlabeled data, showing substantially reduced variance and mean squared error. It also superior to unsupervised methods that directly substitute surrogates for the true variables, which often introduce substantial bias. The empirical results confirm the theoretical properties, showing that the SMMAL estimator maintains nominal coverage rates for confidence intervals while achieving efficiency gains.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{lcccc}
+		\toprule
+		\textbf{Source of Variation} & \textbf{Sum of Squares} & \textbf{Degrees of Freedom} & \textbf{Mean Squares} & \textbf{F Value} \\
+		\midrule
+		Between Groups & $\text{SSB} = \sum n(\bar{X} - \bar{X})^2$ & $\text{df}_1 = k - 1$ & $\text{MSB} = \dfrac{\text{SSB}}{k - 1}$ & $f = \dfrac{\text{MSB}}{\text{MSE}}$ \\
+		Error & $\text{SSE} = \sum\sum(X - \bar{X})^2$ & $\text{df}_2 = N - k$ & $\text{MSE} = \dfrac{\text{SSE}}{N - k}$ & \\
+		Total & $\text{SST} = \text{SSB} + \text{SSE}$ & $\text{df}_3 = N - 1$ & & \\
+		\bottomrule
+	\end{tabular}
+	\caption{ANOVA Table}
+	\label{tab:anova}
+\end{table}
+
+\end{document}
+
+
+
+
+

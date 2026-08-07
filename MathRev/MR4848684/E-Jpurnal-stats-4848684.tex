@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ Pseudo-empirical likelihood methods for
+	causal inference \\MR4848684}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+The authors present a comprehensive and unified framework for causal inference using pseudo-empirical likelihood (PEL) methods. The paper addresses a critical challenge in observational studies: the need to adjust for confounding variables to obtain unbiased estimates of average treatment effects (ATEs) without relying on restrictive parametric models. The authors' primary contribution is the innovative integration of the empirical likelihood (EL) method with propensity score (PS) and prognostic score (PGS) weighting, resulting in robust, efficient, and double-robust estimators.
+
+The core of their methodology involves maximizing a pseudo-empirical log-likelihood function subject to constraints that incorporate the covariate balancing properties of propensity scores. Let $Z_i$ be the treatment indicator ($Z_i = 1$ for treatment, $Z_i = 0$ for control), $X_i$ be a vector of pre-treatment covariates, and $Y_i$ be the observed outcome for unit $i = 1, \ldots, n$.
+
+The goal is to estimate the ATE, $\tau = E{Y(1) - Y(0)}$. The authors propose estimating the treatment mean, $\mu_1 = E(Y(1))$, by assigning weights $p_i$ to the treated units. These weights are found by solving the following constrained optimization problem:
+
+$$
+\max{p_i}\sum_{i: Z_i = 1} \log(p_i)  \text{ subject to } p_i \ge 0, \sum_{i: Z_i}p_i = 1, \text{ and } \sum_{i: Z = 1} p_i g(X_i) = \bar{g}
+$$
+
+Here, $g(X)$ is a vector of known functions of the covariates (e.g., $g(X) = X$ for balancing the first moment), and $\bar{g} = n^{-1} \sum_{i=1}^n g(X_i)$ is the population moment estimated from the combined sample. This constraint ensures that the weighted covariate distribution of the treated group matches that of the entire population.
+
+A pivotal insight is the connection to the propensity score. If the true propensity score model is $\pi(X) = P(Z=1 \mid X)$ and follows a logistic model, $\pi(X_i) = {1 + \exp(-\beta^T X_i)}^{-1}$, the authors show that the dual problem of the above PEL optimization leads to weights identical to those from the Horvitz-Thompson estimator using a maximum likelihood estimated PS. However, the PEL framework is more flexible as it does not require a correctly specified logistic model; it only requires the balancing condition to hold.
+
+The paper's second major contribution is extending this PEL framework to create double-robust (DR) estimators. A DR estimator for $\mu_1$ combines the outcome regression model and the propensity score model, remaining consistent if either model is correct. The authors achieve this by incorporating an additional constraint based on the prognostic score (PGS), $\phi(X)$, which summarizes the information in $X$ related to the outcome $Y(0)$.
+
+The constraint for the DR-PEL estimator for the control group mean might take a form such as:
+
+$$
+\sum_{i: Z_i = 1}p_i \phi(X_i) = \bar{\phi}
+$$
+
+where $\bar{\phi}$ is an estimate from the treated group or the whole population. This ensures balance on the prognostic score, further improving efficiency and robustness. They rigorously establish the asymptotic properties of their proposed estimators, including consistency and normality.
+
+Their pseudo-empirical likelihood framework offers a powerful, flexible, and theoretically sound alternative to traditional propensity score methods. By formally linking empirical likelihood with covariate balancing, they derive estimators that are robust, efficient, and intuitive. The paper is a valuable resource for methodologies and applied researchers who require reliable methods for estimating causal effects from observational data. The extensive asymptotic theory and simulation studies presented confirm the practical utility of their proposed methods.
+
+
+\end{document}
+
+
+
+
+

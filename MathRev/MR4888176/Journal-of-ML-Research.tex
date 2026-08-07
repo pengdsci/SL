@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\Bayesian analysis with conditionally
+	identically distributed sequences \\    MR4888176 }
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+
+
+
+
+
+This paper develops a framework for Bayesian-style inference without assuming exchangeability of the observed sequence, instead employing the weaker condition of \emph{conditional identical distribution} (c.i.d.), originally studied by Berti et al. (2004). The central contribution is the demonstration that prior and posterior distributions on a parameter space can still be rigorously defined using c.i.d. sequences, with predictive distributions updated via copula-based martingale constructions.
+
+Let $X_{1:\infty} = (X_1, X_2, \dots)$ be a sequence of real-valued random variables. Standard Bayesian inference relies on exchangeability, which implies the existence of a random probability measure $\mu$ such that, given $\mu$, the observations are i.i.d. (de Finetti's theorem). The authors relax exchangeability to the c.i.d. property, defined by 
+\[
+\mathbb{E}[g(X_k) \mid X_{1:n}] = \mathbb{E}[g(X_{n+1}) \mid X_{1:n}] \quad \text{a.s.}
+\]
+for all $k > n \geq 1$ and all bounded measurable $g$. A key consequence is that there still exists a random probability measure $\mu$ such that 
+\[
+\mu(B) = \lim_{n\to\infty} \mathbb{P}(X_{n+1} \in B \mid X_{1:n}) \quad \text{a.s.},
+\]
+playing the role of the directing measure.
+
+A central novelty is the construction of prior and posterior distributions on a parameter space $\Theta$ using the maximum likelihood estimator (MLE) from the infinite sequence. Let $f(x;\theta)$ be a parametric model and define 
+\[
+\hat{\theta}_n = \arg\max_{\theta \in \Theta} \sum_{i=1}^n \log f(X_i;\theta).
+\]
+Under appropriate regularity conditions (strict concavity, integrability, tail conditions), Theorem 3.2 proves that $\hat{\theta}_n$ converges almost surely to a random variable $\hat{\theta}_\infty$. The distribution of $\hat{\theta}_\infty$ (starting from $X_1$) defines the prior on $\Theta$. Given observed $X_{1:n}$, the sequence $X_{n+1:\infty}$ is again c.i.d., and the distribution of $\hat{\theta}_\infty^{(n)}$ (computed from $X_{n+1:\infty}$) defines the posterior. This mirrors Doob's (1949) insight that posteriors can be derived from predictive distributions without an explicitly specified prior.
+
+To implement the framework, the authors use copulas to model the joint distribution of successive predictions. Theorem 3.1 provides a characterization: $X_{1:\infty}$ is c.i.d. iff there exist copulas $C_{x_{1:n}}$ such that 
+\[
+\mathbb{P}(X_{n+1} \le x, X_{n+2} \le y \mid X_{1:n}=x_{1:n}) = C_{x_{1:n}}\big(F(x\mid x_{1:n}), F(y\mid x_{1:n})\big),
+\]
+where 
+\[
+F(x\mid x_{1:n}) = \mathbb{P}(X_{n+1} \le x \mid X_{1:n}=x_{1:n}).
+\]
+A practical iterative scheme is 
+\[
+F_{m+1}(x) = (1-\alpha_m)F_m(x) + \alpha_m C_\rho(F_m(x), F_m(x_{m+1})),
+\]
+with $\alpha_m = 1/m$ and $C_\rho$ a Gaussian copula:
+\[
+C_\rho(u,v) = \Phi\left( \frac{\Phi^{-1}(u) - \rho \Phi^{-1}(v)}{\sqrt{1-\rho^2}} \right),
+\]
+ensuring the predictive distributions $F_m$ form a martingale converging to $\mu$.
+
+A simpler parametric c.i.d. construction is given by 
+\[
+x_{n} = \theta_{n-1} + \sigma_{n-1}z_n, \quad
+\theta_n = (1-a_n)\theta_{n-1} + a_n x_n, \quad
+\sigma_n^2 = \sigma_{n-1}^2(1-a_n^2),
+\]
+with $z_n \stackrel{\text{i.i.d.}}{\sim} N(0,1)$ and $a_n \in (0,1)$. Then $\theta_\infty = \lim \theta_n$ exists almost surely and defines the prior. For mixture models, only the component from which the observation was taken is updated, preserving the c.i.d. property.
+
+The paper provides almost-sure convergence results for the MLE under c.i.d. sequences, extending classical i.i.d. consistency to a more flexible dependence structure. A subtle point raised by a referee is that predictive distributions converge weakly to $\mu$, but not necessarily in total variation; fast enough decay of $\alpha_n$ (e.g., $\sum \alpha_n < \infty$) ensures total variation convergence. This framework may be particularly useful when exchangeability is too restrictive or computationally demanding.
+
+\end{document}
+
+
+

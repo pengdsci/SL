@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{A Review of \\ A new reproducing kernel-based nonlinear dimension reduction method for survival data \\MR4828101}
+%\author{}
+%\date{\today}
+
+\begin{document}
+	\maketitle	
+	% Optional TOC
+	% \tableofcontents
+	% \pagebreak
+	
+The authors introduce RDSIR, a reproducing kernel–based double sliced inverse regression method, as a new approach for nonlinear sufficient dimension reduction in survival data subject to censoring. The central idea is to embed the covariates into a reproducing kernel Hilbert space (RKHS) and then adapt the double slicing strategy, originally used in linear SDR, to correct for censoring bias.  
+
+In their setup, the survival outcome is defined as \(T\), the censoring time as \(C\), and the observed time as \(T_e = T \wedge C\) with indicator \(\Delta = I(T \leq C)\). The model assumes that the survival outcome depends on a finite set of nonlinear functions of the covariates, \(u_j(X)\), which belong to an RKHS with kernel \(R\). Using the spectral expansion of the kernel,  
+
+\[
+R(s,t) = \sum_{j=1}^\infty a_j \phi_j(s)\phi_j(t),
+\]
+
+they map covariates into a feature space via  
+
+\[
+\phi(x) = (\sqrt{a_1}\phi_1(x), \sqrt{a_2}\phi_2(x),\dots)^\top,
+\]
+
+so that nonlinear functions in the original space correspond to linear functionals in the feature space.  
+
+To handle censoring, the method uses double slicing, estimating conditional expectations such as \(E[\phi(X) I(T \ge t)]\) while adjusting censored observations with weights. The essential computational step is then to solve a generalized eigenproblem,  
+
+\[
+\Gamma \beta = \lambda \Sigma \beta,
+\]
+
+where \(\Sigma\) represents the covariance operator of the transformed covariates and \(\Gamma\) captures the inverse regression structure. The eigenvectors \(\beta\) correspond to nonlinear dimension reduction directions in the original covariate space.  
+
+The authors establish theoretical guarantees, showing that the estimators are consistent under mild assumptions and deriving convergence rates using perturbation theory. Their simulations demonstrate that RDSIR performs as well as linear DSIR when the true relationship is linear, but substantially better when nonlinear structures are present. A real-data application further illustrates the method’s predictive usefulness.  
+
+\end{document}
+
+
+
+
+
